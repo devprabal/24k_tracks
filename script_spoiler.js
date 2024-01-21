@@ -1,12 +1,12 @@
-const cal_gym = new CalHeatmap();
-cal_gym.paint(
+const cal_spoiler = new CalHeatmap();
+cal_spoiler.paint(
     {
-        itemSelector: "#cal-gym-heatmap",
+        itemSelector: "#cal-spoiler-heatmap",
         data: {
-            source: "./records/gym_track.csv",
+            source: "./records/spoiler_track.csv",
             type: "csv",
             x: "date",
-            y: (d) => +d["energylevel"],
+            y: (d) => +d["spoiler"],
             groupY: "max",
         },
         date: { start: new Date("2024-01-01") },
@@ -14,15 +14,15 @@ cal_gym.paint(
         scale: {
             color: {
                 type: "sequential",
-                scheme: "Purples",
-                domain: [0, 1, 2, 3, 4, 5],
+                scheme: "Greys",
+                domain: [0, 1],
             },
         },
         domain: {
             type: "year",
             label: { text: null },
         },
-        subDomain: { 
+        subDomain: {
             type: "day",
             radius: 3,
             gutter: 4,
@@ -37,7 +37,7 @@ cal_gym.paint(
                 // console.log(today);
                 // console.log(received_date);
                 let result = today.localeCompare(received_date);
-                if ( result == 0) {
+                if (result == 0) {
                     return "🟨";
                 } else {
                     return "";
@@ -47,20 +47,11 @@ cal_gym.paint(
     },
     [
         [
-            Legend,
-            {
-                tickSize: 5,
-                width: 250,
-                itemSelector: "#gym-legend",
-                label: "energy level",
-            },
-        ],
-        [
             Tooltip,
             {
                 text: function (date, value, dayjsDate) {
                     return (
-                        (value ? value + "/5" : "No data") + " on " + dayjsDate.format("LL")
+                        (value ? "oops😟" : "yay!😄") + ", " + dayjsDate.format("LL")
                     );
                 },
             },
@@ -68,7 +59,7 @@ cal_gym.paint(
         // [
         //     CalendarLabel,
         //     {
-        //         key: 'gym_label',
+        //         key: 'spoiler_label',
         //         width: 40,
         //         textAlign: "middle",
         //         text: () => dayjs.weekdaysShort().map((d, i) => (i % 2 == 0 ? "" : d)),
