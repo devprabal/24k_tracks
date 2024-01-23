@@ -32,3 +32,15 @@ body {
 	color: #525252;
 	margin-bottom: 10px;
 }
+.track-category-korean-text {
+	font-family: "Englebert";
+	font-size: 52px;
+	color: #1b9e77;
+	margin-bottom: 10px;
+}
+#korean-legend span {
+	font-family: "Comfortaa";
+	font-size: 15px;
+	color: var(--black);
+    padding-bottom: 5px;
+}
