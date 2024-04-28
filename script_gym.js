@@ -1,3 +1,26 @@
+function getIntBeforeDecimalPoint(number) {
+    const numberString = number.toString();
+  if (!numberString.includes(".")) {
+    return number;
+  }
+  const parts = numberString.split(".");
+  const integer = parseInt(parts[0], 10);
+  return integer;
+}
+
+function getDecimalDigits(number) {
+    const numberString = number.toString();
+
+    if (!numberString.includes(".")) {
+        return [];
+    }
+    const parts = numberString.split(".");
+    const decimalString = parts[1];
+    const digits = decimalString.split("").map(Number);
+
+    return digits;
+}
+
 const cal_gym = new CalHeatmap();
 cal_gym.paint(
     {
@@ -63,20 +86,41 @@ cal_gym.paint(
             {
                 // enabled: false,
                 text: function (date, value, dayjsDate) {
-                    return (
-                        (value ? value + "/5" : "No data") + " on " + dayjsDate.format("LL")
-                    );
+                    if(value) {
+                        var int_before_decimal_pt = getIntBeforeDecimalPoint(value);
+                        var digits_after_decimal_pt = getDecimalDigits(value);
+                        if(digits_after_decimal_pt.length === 0) {
+                            // console.log("no digits for " + value);
+                            var tooltip_string = "" + int_before_decimal_pt + "/5 " + "on " + dayjsDate.format("LL");
+                            return tooltip_string;
+                        }
+                        else {
+                            // console.log(digits_after_decimal_pt);
+                            var tooltip_string = "" + int_before_decimal_pt + "/5 " + "on " + dayjsDate.format("LL") + "\n *";
+                            for (var i = 0; i < digits_after_decimal_pt.length; i++) {
+                                if(digits_after_decimal_pt[i] === 1 && i === 0) {
+                                    tooltip_string += "Weights ";
+                                }
+                                if(digits_after_decimal_pt[i] === 1 && i === 1) {
+                                    tooltip_string += "Cardio ";
+                                }
+                                if(digits_after_decimal_pt[i] === 1 && i === 2) {
+                                    tooltip_string += "HIIT ";
+                                }
+                                if(digits_after_decimal_pt[i] === 1 && i === 3) {
+                                    tooltip_string += "Spinning ";
+                                }
+                                if(digits_after_decimal_pt[i] === 1 && i === 4) {
+                                    tooltip_string += "BodyWtExAtHome ";
+                                }
+                            }
+                            return tooltip_string;
+                        }
+                    } else {
+                        return "No data on " + dayjsDate.format("LL");
+                    }
                 },
             },
         ],
-        // [
-        //     CalendarLabel,
-        //     {
-        //         key: 'gym_label',
-        //         width: 40,
-        //         textAlign: "middle",
-        //         text: () => dayjs.weekdaysShort().map((d, i) => (i % 2 == 0 ? "" : d)),
-        //     },
-        // ],
     ]
 );
