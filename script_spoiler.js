@@ -9,7 +9,10 @@ cal_spoiler.paint(
             y: (d) => +d["spoiler"],
             groupY: "max",
         },
-        date: { start: new Date("2024-01-01") },
+        date: {
+            start: new Date("2024-01-01"),
+            locale: { weekStart: 1 }
+        },
         range: 1,
         scale: {
             color: {

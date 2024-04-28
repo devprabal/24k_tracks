@@ -9,7 +9,10 @@ cal_gym.paint(
             y: (d) => +d["energylevel"],
             groupY: "max",
         },
-        date: { start: new Date("2024-01-01") },
+        date: {
+            start: new Date("2024-01-01"),
+            locale: { weekStart: 1 }
+        },
         range: 1,
         scale: {
             color: {
@@ -22,7 +25,7 @@ cal_gym.paint(
             type: "year",
             label: { text: null },
         },
-        subDomain: { 
+        subDomain: {
             type: "day",
             radius: 3,
             gutter: 4,
@@ -37,7 +40,7 @@ cal_gym.paint(
                 // console.log(today);
                 // console.log(received_date);
                 let result = today.localeCompare(received_date);
-                if ( result == 0) {
+                if (result == 0) {
                     return "🟨";
                 } else {
                     return "";
@@ -58,6 +61,7 @@ cal_gym.paint(
         [
             Tooltip,
             {
+                // enabled: false,
                 text: function (date, value, dayjsDate) {
                     return (
                         (value ? value + "/5" : "No data") + " on " + dayjsDate.format("LL")

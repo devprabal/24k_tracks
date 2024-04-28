@@ -9,7 +9,10 @@ cal_korean.paint(
             y: "topic",
             groupY: d => d[0],
         },
-        date: { start: new Date("2024-01-01") },
+        date: {
+            start: new Date("2024-01-01"),
+            locale: { weekStart: 1 }
+        },
         range: 1,
         scale: {
             color: {
