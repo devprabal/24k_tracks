@@ -39,8 +39,8 @@ cal_gym.paint(
         range: 1,
         scale: {
             color: {
-                type: "sequential",
-                scheme: "Purples",
+                type: "linear",
+                scheme: "BuPu",
                 domain: [0, 1, 2, 3, 4, 5],
             },
         },
