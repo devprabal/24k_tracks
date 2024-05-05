@@ -45,6 +45,18 @@ body {
 	color: var(--black);
 	padding-bottom: 5px;
 }
+.track-category-study-text {
+	font-family: "Englebert";
+	font-size: 52px;
+	color: #228B22;
+	margin-bottom: 10px;
+}
+#study-legend span {
+	font-family: "Comfortaa";
+	font-size: 15px;
+	color: var(--black);
+	padding-bottom: 5px;
+}
 button {
 	background-color: var(--black);
 	color: var(--white);
@@ -79,6 +91,12 @@ button {
 		#korean-legend span {
 			color: var(--white);
 		}
+        .track-category-study-text {
+            color: #32CD32;
+        }
+        #study-legend span {
+            color: var(--white);
+        }
 		button {
 			background-color: var(--white);
 			color: var(--black);
