@@ -61,7 +61,6 @@ cal_study.paint(
                 tickSize: 5,
                 width: 250,
                 itemSelector: "#study-legend",
-                label: "터픽",
             },
         ],
     ]
