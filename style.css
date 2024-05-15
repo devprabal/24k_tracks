@@ -66,44 +66,42 @@ button {
 	font-size: 15px;
 }
 
-@media (prefers-color-scheme: dark) {
-	.dark-mode {
-		background-color: var(--black);
-		color: var(--white);
+.dark-mode {
+    background-color: var(--black);
+    color: var(--white);
 
-		.track-category-gym-text {
-			color: rgb(163, 113, 249);
-		}
-		#ch-tooltip {
-			background-color: var(--black);
-			border: solid var(--white);
-			color: var(--white);
-		}
-		#gym-legend text {
-			color: var(--white);
-		}
-		.track-category-spoiler-text {
-			color: #d3d2d2;
-		}
-		.track-category-korean-text {
-			color: rgb(237, 9, 47);
-		}
-		#korean-legend span {
-			color: var(--white);
-		}
-        .track-category-study-text {
-            color: #32CD32;
-        }
-        #study-legend span {
-            color: var(--white);
-        }
-		button {
-			background-color: var(--white);
-			color: var(--black);
-			border: solid var(--white);
-			border-radius: 10px;
-            font-family: "Comfortaa";
-	        font-size: 15px;
-		}
-	}
+    .track-category-gym-text {
+        color: rgb(163, 113, 249);
+    }
+    #ch-tooltip {
+        background-color: var(--black);
+        border: solid var(--white);
+        color: var(--white);
+    }
+    #gym-legend text {
+        color: var(--white);
+    }
+    .track-category-spoiler-text {
+        color: #d3d2d2;
+    }
+    .track-category-korean-text {
+        color: rgb(237, 9, 47);
+    }
+    #korean-legend span {
+        color: var(--white);
+    }
+    .track-category-study-text {
+        color: #32CD32;
+    }
+    #study-legend span {
+        color: var(--white);
+    }
+    button {
+        background-color: var(--white);
+        color: var(--black);
+        border: solid var(--white);
+        border-radius: 10px;
+        font-family: "Comfortaa";
+        font-size: 15px;
+    }
 }
