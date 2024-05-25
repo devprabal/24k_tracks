@@ -115,10 +115,12 @@ struct tm yyyymmdd_to_struct_tm(int yyyy, int mm, int dd)
 
 void day_of_year_today(void)
 {
+    printf("\n~~~~~~~~~~~~~~~~~\n");
     time_t today_epoch;
     time(&today_epoch);
     struct tm *parsable_time = localtime(&today_epoch);
     printf("Today is %dth day of the year.\n[0 based index, 0th day == Jan 1]\n", parsable_time->tm_yday);
+    printf("~~~~~~~~~~~~~~~~~\n");
 }
 
 int day_of_the_year(int yyyy, int mm, int dd)
@@ -136,7 +138,7 @@ void print_tm_info(struct tm tm_info)
 
 void print_gym_rec_info(SingleRecord s_info)
 {
-    printf("\nGYM");
+    printf("\n\nGYM");
     GymRecord info = s_info.gym_rec;
     printf("\nIntensity: %d\nActivities: ", info.intensity);
     for (int i = 0; i < GYM_ACTIVITY_MAX; i++)
@@ -168,7 +170,7 @@ void print_gym_rec_info(SingleRecord s_info)
 
 void print_study_rec_info(SingleRecord s_info)
 {
-    printf("\nSTUDY");
+    printf("\n\nSTUDY");
     StudyRecord info = s_info.study_rec;
     printf("\nIntensity: %d\nActivities: ", info.intensity);
     for (int i = 0; i < STUDY_ACTIVITY_MAX; i++)
@@ -200,7 +202,7 @@ void print_study_rec_info(SingleRecord s_info)
 
 void print_korean_rec_info(SingleRecord s_info)
 {
-    printf("\nKOREAN");
+    printf("\n\nKOREAN");
     KoreanLangRecord info = s_info.koreanlang_rec;
     printf("\nIntensity: %d\nActivities: ", info.intensity);
     for (int i = 0; i < KOREAN_LANG_ACTIVITY_MAX; i++)
@@ -223,7 +225,7 @@ void print_korean_rec_info(SingleRecord s_info)
 
 void print_spoiler_rec_info(SingleRecord s_info)
 {
-    printf("\nSPOILER");
+    printf("\n\nSPOILER");
     SpoilerRecord info = s_info.spoiler_rec;
     printf("\nIntensity: %d\nActivities: ", info.intensity);
     for (int i = 0; i < SPOILER_ACTIVITY_MAX; i++)
@@ -251,26 +253,107 @@ void print_records_for_day(int yyyy, int mm, int dd)
     print_study_rec_info(this_day.records[STUDY]);
     print_korean_rec_info(this_day.records[KOREAN]);
     print_spoiler_rec_info(this_day.records[SPOILER]);
-    printf("\n=================");
+    printf("\n=================\n");
+}
+
+static int curr_yday = 0;
+
+void make_gym_record(GymRecord rec)
+{
+    days[curr_yday].records[GYM].gym_rec.intensity = rec.intensity;
+    for(int i = 0; i < GYM_ACTIVITY_MAX; i++)
+    {
+        days[curr_yday].records[GYM].gym_rec.activities[i] = rec.activities[i];
+    }
+}
+
+void make_koreanlang_record(KoreanLangRecord rec)
+{
+    days[curr_yday].records[KOREAN].koreanlang_rec.intensity = rec.intensity;
+    for(int i = 0; i < KOREAN_LANG_ACTIVITY_MAX; i++)
+    {
+        days[curr_yday].records[KOREAN].koreanlang_rec.activities[i] = rec.activities[i];
+    }
+}
+
+void make_spoiler_record(SpoilerRecord rec)
+{
+    days[curr_yday].records[SPOILER].spoiler_rec.intensity = rec.intensity;
+    for(int i = 0; i < SPOILER_ACTIVITY_MAX; i++)
+    {
+        days[curr_yday].records[SPOILER].spoiler_rec.activities[i] = rec.activities[i];
+    }
+}
+
+void make_study_record(StudyRecord rec)
+{
+    days[curr_yday].records[STUDY].study_rec.intensity = rec.intensity;
+    for(int i = 0; i < STUDY_ACTIVITY_MAX; i++)
+    {
+        days[curr_yday].records[STUDY].study_rec.activities[i] = rec.activities[i];
+    }
+}
+
+void make_day(int yyyy, int mm, int dd, GymRecord rec_gym, KoreanLangRecord rec_korean, SpoilerRecord rec_spoiler, StudyRecord rec_study)
+{
+    struct tm tm_x = yyyymmdd_to_struct_tm(yyyy, mm, dd);
+    int yday = day_of_the_year(yyyy, mm, dd);
+    curr_yday = yday;
+    days[curr_yday].yyyymmdd = tm_x;
+
+    make_gym_record(rec_gym);
+    make_koreanlang_record(rec_korean);
+    make_spoiler_record(rec_spoiler);
+    make_study_record(rec_study);
+}
+
+void entries_MAY(void)
+{
+    {
+        GymRecord rec_gym = {
+            .intensity = INTENSITY_5,
+            .activities = {WEIGHTS, CARDIO},
+        };
+        KoreanLangRecord rec_korean =  {
+            .intensity = INTENSITY_2,
+            .activities = {KSTUDY},
+        };
+        SpoilerRecord rec_spoiler = {
+            .intensity = INTENSITY_4,
+            .activities = {SPOILER_1},
+        };
+        StudyRecord rec_study = {
+            .intensity = INTENSITY_5,
+            .activities = {CODING, WATCHING, READING},
+        };
+
+        make_day(2024, 05, 19, rec_gym, rec_korean, rec_spoiler, rec_study);
+        print_records_for_day(2024, 05, 19);
+    }
+    {
+        GymRecord rec_gym = {
+            .intensity = INTENSITY_0,
+        };
+        KoreanLangRecord rec_korean =  {
+            .intensity = INTENSITY_0,
+        };
+        SpoilerRecord rec_spoiler = {
+            .intensity = INTENSITY_5,
+            .activities = {SPOILER_1},
+        };
+        StudyRecord rec_study = {
+            .intensity = INTENSITY_2,
+            .activities = {CODING,},
+        };
+
+        make_day(2024, 05, 25, rec_gym, rec_korean, rec_spoiler, rec_study);
+        print_records_for_day(2024, 05, 25);
+    }
 }
 
 int main(void)
 {
     day_of_year_today();
-    struct tm tm_20240519 = yyyymmdd_to_struct_tm(2024, 05, 19);
-    Day day_20240519 = {
-        .yyyymmdd = tm_20240519,
-        .records = {
-            [GYM] = {
-                .gym_rec.intensity = INTENSITY_3,
-                .gym_rec.activities = {WEIGHTS, HIIT},
-            },
-            [STUDY] = {
-                .study_rec.intensity = INTENSITY_2,
-                .study_rec.activities = {WATCHING},
-            },
-        }};
-    days[139] = day_20240519;
-    print_records_for_day(2024, 05, 19);
+    entries_MAY();
     return 0;
 }
