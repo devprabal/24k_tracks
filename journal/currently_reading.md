@@ -3,7 +3,7 @@
 ## In progress
 
 Priniples of Software Design
-
+> ch. 11
 
 A tour of C++
 > ch. 7
@@ -26,7 +26,9 @@ Editorials from The Hindu newspaper
 
 ## Paused
 
-Modern C
+**Modern C** book by Jens Guestedt
+
+C-style [github](https://github.com/mcinglis/c-style)
 
 
 
