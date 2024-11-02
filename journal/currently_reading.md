@@ -26,10 +26,11 @@ Editorials from The Hindu newspaper
 
 ## Paused
 
-**Modern C** book by Jens Guestedt
+**Modern C** book by Jens Guestedt  
 
-C-style [github](https://github.com/mcinglis/c-style)
+C-style [github](https://github.com/mcinglis/c-style)  
 
+[xv6](https://github.com/devprabal/winston/tree/main/docs/xv6)  
 
 
 ## Try to read
