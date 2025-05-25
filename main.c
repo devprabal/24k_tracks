@@ -8,32 +8,6 @@
 #include "study.h"
 #include "korean.h"
 
-static void print_records_for_day(int yyyy, int mm, int dd)
-{
-    printf("\n=================");
-    struct tm this_day =  yyyymmdd_to_struct_tm(yyyy, mm, dd);
-    print_tm_info(this_day);
-
-    int yday = day_of_the_year(yyyy, mm, dd);
-    {
-        SingleRecord* srec = get_record_for_yday(yday, GYM);
-        print_gym_rec_info(srec);
-    }
-    {
-        SingleRecord* srec = get_record_for_yday(yday, STUDY);
-        print_study_rec_info(srec);
-    }
-    {
-        SingleRecord* srec = get_record_for_yday(yday, KOREAN);
-        print_korean_rec_info(srec);
-    }
-    {
-        SingleRecord* srec = get_record_for_yday(yday, SPOILER);
-        print_spoiler_rec_info(srec);
-    }
-    printf("\n=================\n");
-}
-
 static void entries_MAY(void)
 {
     {
@@ -59,18 +33,26 @@ static void cleanup(void)
         {
             SingleRecord* srec = get_record_for_yday(i, GYM);
             free_gym_rec_info(srec);
+            Note* note = get_note_for_yday(i, GYM);
+            free_note_message(note);
         }
         {
             SingleRecord* srec = get_record_for_yday(i, KOREAN);
             free_korean_rec_info(srec);
+            Note* note = get_note_for_yday(i, KOREAN);
+            free_note_message(note);
         }
         {
             SingleRecord* srec = get_record_for_yday(i, STUDY);
             free_study_rec_info(srec);
+            Note* note = get_note_for_yday(i, STUDY);
+            free_note_message(note);
         }
         {
             SingleRecord* srec = get_record_for_yday(i, SPOILER);
             free_spoiler_rec_info(srec);
+            Note* note = get_note_for_yday(i, SPOILER);
+            free_note_message(note);
         }
     }
 }

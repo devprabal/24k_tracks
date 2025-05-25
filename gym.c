@@ -6,7 +6,7 @@
 
 typedef struct GymRecord
 {
-    INTENSITY intensity;
+    INTENSITY intensity[GYM_ACTIVITY_MAX];
     GYM_ACTIVITY activities[GYM_ACTIVITY_MAX];
 } GymRecord;
 

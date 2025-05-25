@@ -41,10 +41,21 @@ typedef union SingleRecord
     StudyRecord* study_rec;
 } SingleRecord;
 
+typedef struct Note
+{
+    //// You can replace this datatype with your user-defined type
+    //// to make more structured data format.
+    //// Change free_note_message() accordingly.
+    char* message;
+} Note;
+
 SingleRecord* get_record_for_yday(int yday, RECORD_TYPE type);
+Note* get_note_for_yday(int yday, RECORD_TYPE type);
+void free_note_message(Note* note);
 struct tm yyyymmdd_to_struct_tm(int yyyy, int mm, int dd);
 int day_of_the_year(int yyyy, int mm, int dd);
 void day_of_year_today(void);
 void print_tm_info(struct tm tm_info);
+void print_records_for_day(int yyyy, int mm, int dd);
 
 #endif // COMMON_H
